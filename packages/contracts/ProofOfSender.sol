@@ -26,14 +26,14 @@ contract ProofOfSender {
 
     mapping(uint256 => string) public tokenIDToName;
 
-    constructor(Verifier v, DKIMRegistry d) ERC721("VerifiedEmail", "VerifiedEmail") payable {
+    constructor(Verifier v, DKIMRegistry d) payable {
         verifier = v;
         dkimRegistry = d;
     }
 
     function _domainCheck(uint256[] memory headerSignals) public pure returns (bool) {
         string memory senderBytes = StringUtils.convertPackedBytesToString(headerSignals, 18, bytesInPackedBytes);
-        string[2] memory domainStrings = ["verify@x.com", "info@x.com"];
+        string[2] memory domainStrings = ["verify@gmail.com", "info@gmail.com"];
         return
             StringUtils.stringEq(senderBytes, domainStrings[0]) || StringUtils.stringEq(senderBytes, domainStrings[1]);
     }
